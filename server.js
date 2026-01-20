@@ -5,6 +5,7 @@ const http = require('http');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 5520;
 
@@ -96,6 +97,17 @@ app.get('/', (req, res) => {
 });
 
 const server = http.createServer(app);
+const io = new Server(server, {cors:{origin:'*'}});
+
+// WebSocket handlers
+io.on('connection', (socket) => {
+  console.log('🔄 Novo cliente conectado:', socket.id);
+  socket.emit('server:info', serverData);
+  socket.on('disconnect', () => console.log('🔌 Cliente desconectado:', socket.id));
+});
+
+const {Server} = require('socket.io');
+const path = require('path');
 
 server.listen(PORT, () => {
   console.log(`\n✅ Servidor Hytale Mock iniciado!`);

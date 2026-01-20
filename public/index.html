@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hytale Server Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎮 Hytale Server Dashboard</h1>
+                <div class="header-stats">
+                    <span class="stat">🟢 Status: <span id="status">Conectando...</span></span>
+                    <span class="stat">⏱️ Uptime: <span id="uptime">0s</span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Server Info Section -->
+            <section class="section server-info">
+                <h2>📊 Informações do Servidor</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <label>Nome</label>
+                        <p id="server-name">Carregando...</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Versão</label>
+                        <p id="server-version">Carregando...</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Mundo</label>
+                        <p id="server-world">Carregando...</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Máximo de Jogadores</label>
+                        <p id="max-players">Carregando...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Players Section -->
+            <section class="section players-section">
+                <div class="section-header">
+                    <h2>👥 Jogadores Online (<span id="player-count">0</span>/<span id="max-player-count">10</span>)</h2>
+                    <input type="text" id="join-username" placeholder="Nome do jogador" class="input-small">
+                    <button id="btn-join" class="btn btn-success">Conectar</button>
+                </div>
+                <div id="players-list" class="players-grid">
+                    <p class="empty-state">Nenhum jogador conectado</p>
+                </div>
+            </section>
+
+            <!-- Controls Section -->
+            <section class="section controls-section">
+                <h2>⚙️ Controles do Servidor</h2>
+                <div class="controls-grid">
+                    <button id="btn-restart" class="btn btn-warning">🔄 Reiniciar Servidor</button>
+                    <button id="btn-saveworld" class="btn btn-info">💾 Salvar Mundo</button>
+                    <button id="btn-clear-players" class="btn btn-danger">🗑️ Desconectar Todos</button>
+                </div>
+            </section>
+
+            <!-- Logs Section -->
+            <section class="section logs-section">
+                <h2>📝 Logs do Servidor</h2>
+                <div id="logs-container" class="logs-container">
+                    <p class="log-entry">Sistema iniciado</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Hytale Server Mock v0.1.0 | Dashboard Admin | <span id="connection-indicator">●</span></p>
+        </footer>
+    </div>
+
+    <!-- Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
