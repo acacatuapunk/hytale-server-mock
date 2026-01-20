@@ -3,12 +3,9 @@ const cors = require('cors');
 const http = require('http');
 const { v4: uuidv4 } = require('uuid');
 
-const {Server} = require('socket.io');
-const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 5520;
 const HOST = process.env.HOST || 'localhost';
@@ -200,17 +197,6 @@ app.use(errorHandler);
 // ============================================
 
 const server = http.createServer(app);
-const io = new Server(server, {cors:{origin:'*'}});
-
-// WebSocket handlers
-io.on('connection', (socket) => {
-  console.log('🔄 Novo cliente conectado:', socket.id);
-  socket.emit('server:info', serverData);
-  socket.on('disconnect', () => console.log('🔌 Cliente desconectado:', socket.id));
-});
-
-const {Server} = require('socket.io');
-const path = require('path');
 
 // Atualizar uptime a cada segundo
 const uptimeInterval = setInterval(() => {
